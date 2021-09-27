@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.s2dioapps.metask.ui.component.gallery.view.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:name="com.s2dioapps.metask.ui.component.tasktoday.view.TaskTodayFragment"
+        android:label="@string/menu_task_today"
+        tools:layout="@layout/fragment_task_today" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.s2dioapps.metask.ui.component.slideshow.view.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.s2dioapps.metask.ui.component.setting.view.SettingFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
