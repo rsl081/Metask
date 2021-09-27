@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.component.setting.view.SettingFragment">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_circle_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_50sdp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_settings"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_settings" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="John Doe"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/iv_circle_settings"
+            app:layout_constraintTop_toTopOf="@+id/iv_circle_settings" />
+
+        <TextView
+            android:id="@+id/tv_num_of_task_activity_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="S2dioapps"
+            app:layout_constraintStart_toEndOf="@+id/iv_circle_settings"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/_20sdp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/_20sdp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/_20sdp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/_20sdp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/_30sdp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/_30sdp" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="@dimen/_256sdp"
+        android:layout_height="3dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/iv_circle_settings" />
+
+    <TextView
+        android:id="@+id/tv_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="View Profile"
+        android:gravity="start|center_vertical"
+        app:drawableStartCompat="@drawable/mdi___account_circle_outline"
+        android:drawablePadding="@dimen/_6sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_settings"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+    <TextView
+        android:id="@+id/tv_my_org"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="start|center_vertical"
+        android:text="My Organization"
+        android:drawablePadding="@dimen/_6sdp"
+        app:drawableStartCompat="@drawable/mdi___account_group_outline"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile" />
+
+    <TextView
+        android:id="@+id/tv_notif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Notifications"
+        android:drawablePadding="@dimen/_6sdp"
+        app:drawableStartCompat="@drawable/mdi___bell_outline"
+        app:layout_constraintStart_toStartOf="@+id/tv_my_org"
+        app:layout_constraintTop_toBottomOf="@+id/tv_my_org" />
+
+    <TextView
+        android:id="@+id/tv_preferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Preferences"
+        android:drawablePadding="@dimen/_6sdp"
+        app:drawableStartCompat="@drawable/mdi___tune"
+        app:layout_constraintStart_toStartOf="@+id/tv_notif"
+        app:layout_constraintTop_toBottomOf="@+id/tv_notif" />
+
+    <TextView
+        android:id="@+id/tv_signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Sign Out"
+        android:drawablePadding="@dimen/_6sdp"
+        app:drawableStartCompat="@drawable/mdi___logout_variant"
+        app:layout_constraintStart_toStartOf="@+id/tv_preferences"
+        app:layout_constraintTop_toBottomOf="@+id/tv_preferences" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
