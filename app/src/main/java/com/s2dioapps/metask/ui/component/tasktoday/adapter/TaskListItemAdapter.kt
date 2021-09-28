@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.s2dioapps.metask.data.model.task.TaskItem
 import com.s2dioapps.metask.databinding.TaskItemBinding
-import kotlinx.android.synthetic.main.task_item.view.*
 
 class TaskListItemAdapter (private val fragment: Fragment,
                            private var list: MutableList<TaskItem>
@@ -31,9 +30,9 @@ class TaskListItemAdapter (private val fragment: Fragment,
         if(holder is ViewHolder){
             val user = model.assignee
             val createdBy = model.createdBy
-
-            holder.itemView.tv_name_task_item.text = model.name
-            holder.itemView.tv_description_task_item.text = model.description
+//
+//            holder.itemView.tv_name_task_item.text = model.name
+//            holder.itemView.tv_description_task_item.text = model.description
         }
     }
 
