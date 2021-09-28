@@ -3,6 +3,7 @@ package com.s2dioapps.metask.ui.component.login.view
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.view.isVisible
 import com.auth0.android.Auth0
 import com.s2dioapps.metask.R
@@ -16,8 +17,11 @@ import com.auth0.android.result.Credentials
 import com.auth0.android.result.UserProfile
 import com.google.android.material.snackbar.Snackbar
 import com.s2dioapps.metask.databinding.ActivityLoginBinding
+import kotlin.reflect.typeOf
 
 class LoginActivity : AppCompatActivity() {
+
+    private val TAG = "LoginActivity"
 
     private lateinit var account: Auth0
 
@@ -30,9 +34,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val clientId: String = getString(R.string.com_auth0_client_id)
+        val domain: String = getString(R.string.com_auth0_domain)
+
         account = Auth0(
-            "jQY5DDjCDoRL3d03VaJK03Y7R4wZlbca",
-            "dev-eb4zk63w.us.auth0.com"
+            clientId,
+            domain
         )
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -63,24 +70,21 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginWithBrowser() {
         // Setup the WebAuthProvider, using the custom scheme and scope.
+
+        val callback = object : Callback<Credentials, AuthenticationException> {
+            override fun onFailure(exception: AuthenticationException) {
+                Log.d(TAG, "onFailure: ${exception.getDescription()}")
+            }
+
+            override fun onSuccess(credentials: Credentials) {
+                Log.d(TAG, "onSuccess: Access Token = ${credentials.accessToken}")
+                Log.d(TAG, "onSuccess: Id Token = ${credentials.idToken}")
+                Log.d(TAG, "onSuccess: Scopes = ${credentials.scope}")
+            }
+        }
+
         WebAuthProvider.login(account)
-            .withScheme(getString(R.string.com_auth0_scheme))
-            .withScope("openid profile email read:current_user update:current_user_metadata")
-//            .withAudience("https://${getString(R.string.com_auth0_domain)}/api/v2/")
-
-            // Launch the authentication passing the callback where the results will be received
-            .start(this, object : Callback<Credentials, AuthenticationException> {
-                override fun onFailure(exception: AuthenticationException) {
-                    showSnackBar("Failure: ${exception.getCode()}")
-                }
-
-                override fun onSuccess(credentials: Credentials) {
-                    cachedCredentials = credentials
-                    showSnackBar("Success: ${credentials.accessToken}")
-                    updateUI()
-                    showUserProfile()
-                }
-            })
+            .start(this, callback)
     }
 
     private fun logout() {

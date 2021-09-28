@@ -11,9 +11,7 @@
     <string name="menu_task_today">Task Today</string>
     <string name="menu_settings">Settings</string>
 
-
-
-    <string name="com_auth0_client_id">{jQY5DDjCDoRL3d03VaJK03Y7R4wZlbca}</string>
-    <string name="com_auth0_domain">{dev-eb4zk63w.us.auth0.com}</string>
+    <string name="com_auth0_client_id">jQY5DDjCDoRL3d03VaJK03Y7R4wZlbca</string>
+    <string name="com_auth0_domain">dev-eb4zk63w.us.auth0.com</string>
     <string name="com_auth0_scheme">demo</string>
 </resources>
