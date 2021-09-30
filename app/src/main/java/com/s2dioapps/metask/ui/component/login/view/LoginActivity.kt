@@ -29,7 +29,6 @@ class LoginActivity : AppCompatActivity() {
     private var cachedCredentials: Credentials? = null
     private var cachedUserProfile: UserProfile? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -84,6 +83,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         WebAuthProvider.login(account)
+            .withScope("openid profile email read:tasks read:current_user update:current_user_metadata")
+            // specify the audience for the Auth0 Management API
+            .withAudience("https://dev-eb4zk63w.us.auth0.com/api/v2/")
             .start(this, callback)
     }
 
