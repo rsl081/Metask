@@ -8,12 +8,15 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.Toast
 import android.widget.Toolbar
 import androidx.annotation.ColorInt
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -77,6 +80,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
+        var item = menu.findItem(R.id.action_date)
+        item.title = "okay"
         for (i in 0 until menu.size()) {
             val item = menu.getItem(i)
             val spanString = SpannableString(menu.getItem(i).title.toString())
@@ -86,12 +91,24 @@ class MainActivity : AppCompatActivity() {
                 0,
                 spanString.length,
                 0
-            ) //fix the color to white
+            ) //fix the color to matterhorn
 
             item.title = spanString
         }
+
         return true
     }
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId){
+//            R.id.action_date->{
+//                item.title = "goods"
+//                Toast.makeText(applicationContext, "Happy!", Toast.LENGTH_SHORT).show();
+//                return true
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
