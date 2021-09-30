@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Metask</string>
+    <string name="app_name">MeTask</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">John Doe</string>
@@ -7,11 +7,14 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_date"></string>
 
-    <string name="menu_home"><font color="@color/white">S2dioapps</font></string>
-    <string name="menu_task_today"><font color="@color/white">Task Today</font></string>
-    <string name="menu_settings"><font color="@color/white">Settings</font></string>
+    <string name="menu_home">S2dioapps</string>
+    <string name="menu_task_today">Task Today</string>
+    <string name="menu_settings">Settings</string>
 
-    <string name="com_auth0_client_id">{jQY5DDjCDoRL3d03VaJK03Y7R4wZlbca}</string>
-    <string name="com_auth0_domain">{dev-eb4zk63w.us.auth0.com}</string>
+    <string name="com_auth0_client_id">jQY5DDjCDoRL3d03VaJK03Y7R4wZlbca</string>
+    <string name="com_auth0_domain">dev-eb4zk63w.us.auth0.com</string>
     <string name="com_auth0_scheme">demo</string>
+
+    <!--SplashActivity-->
+    <string name="splash_screen_title">MeTask</string>
 </resources>

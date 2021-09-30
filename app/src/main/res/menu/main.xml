@@ -7,3 +7,4 @@
         android:title="@string/action_date"
         app:showAsAction="always" />
 </menu>
+<!--    android:id="@+id/action_settings"-->
