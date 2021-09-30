@@ -13,11 +13,13 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
 import android.widget.Toolbar
+import androidx.activity.viewModels
 import androidx.annotation.ColorInt
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -26,24 +28,33 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.s2dioapps.metask.R
 import com.s2dioapps.metask.databinding.ActivityMainBinding
+import com.s2dioapps.metask.ui.base.view.BaseActivity
+import com.s2dioapps.metask.ui.base.viewmodel.BaseViewModel
+import com.s2dioapps.metask.ui.component.main.viewmodel.MainViewModel
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private val mMainViewModel: MainViewModel by viewModels()
+
+    override fun observeViewModel() {}
+
+    override fun initViewBinding() {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setSupportActionBar(binding.appBarMain.toolbar)
+        //this.mMainViewModel = ViewModelProvider(this).get(mMainViewModel::class.java)
 
-//        binding.appBarMain.fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
+        //binding = ActivityMainBinding.inflate(layoutInflater)
+        //setContentView(binding.root)
+        setSupportActionBar(binding.appBarMain.toolbar)
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -57,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 
 
@@ -81,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         var item = menu.findItem(R.id.action_date)
-        item.title = "okay"
+        item.title = mMainViewModel.displayCurrentDate()
         for (i in 0 until menu.size()) {
             val item = menu.getItem(i)
             val spanString = SpannableString(menu.getItem(i).title.toString())

@@ -5,7 +5,7 @@
     <string name="nav_header_title">John Doe</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_date">Thu, Aug 19, 2021</string>
+    <string name="action_date"></string>
 
     <string name="menu_home">S2dioapps</string>
     <string name="menu_task_today">Task Today</string>
