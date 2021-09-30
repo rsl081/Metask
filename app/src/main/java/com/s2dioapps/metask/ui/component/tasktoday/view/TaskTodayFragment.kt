@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.s2dioapps.metask.databinding.FragmentTaskTodayBinding
-import com.s2dioapps.metask.ui.component.setting.viewmodel.SettingViewModel
 import com.s2dioapps.metask.ui.component.tasktoday.viewmodel.TaskTodayViewModel
 
 class TaskTodayFragment : Fragment() {
