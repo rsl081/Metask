@@ -47,7 +47,6 @@ class LoginActivity : AppCompatActivity() {
         binding.buttonLogout.setOnClickListener { logout() }
         binding.buttonGetMetadata.setOnClickListener { getUserMetadata() }
         binding.buttonPatchMetadata.setOnClickListener { patchUserMetadata() }
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -83,9 +82,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         WebAuthProvider.login(account)
-            .withScope("openid profile email read:tasks read:current_user update:current_user_metadata")
+            .withScope("openid profile email read:current_user update:current_user_metadata")
             // specify the audience for the Auth0 Management API
-            .withAudience("https://dev-eb4zk63w.us.auth0.com/api/v2/")
+            .withAudience("https://metask/api")
             .start(this, callback)
     }
 
