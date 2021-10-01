@@ -22,4 +22,5 @@
         android:name="com.s2dioapps.metask.ui.component.setting.view.SettingFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
+
 </navigation>

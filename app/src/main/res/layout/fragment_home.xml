@@ -60,6 +60,7 @@
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginTop="8dp"
                 android:text="view"
+                android:textColor="@color/dodger_blue"
                 app:layout_constraintStart_toEndOf="@+id/iv_circle"
                 app:layout_constraintTop_toBottomOf="@+id/tv_num_of_task_activity_day" />
 
@@ -107,22 +108,24 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_end="@dimen/_20sdp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="My Task"
-        android:background="@drawable/btn_border"
+        app:strokeColor="@color/black"
+        app:strokeWidth="@dimen/_1sdp"
+        app:cornerRadius="@dimen/_15sdp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/tv_create_newtask_home"
         app:layout_constraintTop_toBottomOf="@+id/cv_greeting" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_create_newtask_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
