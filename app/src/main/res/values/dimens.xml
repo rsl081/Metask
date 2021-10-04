@@ -8,4 +8,7 @@
 
     <!--SplashScreen-->
     <dimen name="title_text_size">@dimen/_50sdp</dimen>
+
+
+    <dimen name="gs_margin">@dimen/_25sdp</dimen>
 </resources>
