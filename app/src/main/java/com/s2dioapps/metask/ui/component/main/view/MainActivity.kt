@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -69,6 +70,11 @@ class MainActivity : BaseActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        val sharedPreferences = getSharedPreferences("sharedPrefs",Context.MODE_PRIVATE)
+        val savedString : String? = sharedPreferences.getString("STRING_KEY", null)
+        if (savedString != null) {
+            Log.i("savedstring",savedString)
+        }
     }
 
 

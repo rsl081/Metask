@@ -4,102 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.component.login.view.LoginActivity">
+    tools:context=".ui.component.login.view.LoginActivity"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button_login"
-        android:layout_width="200dp"
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Authenticate"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <Button
-        android:id="@+id/button_logout"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Log out"
-        android:enabled="false"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/button_login" />
-
-    <TextView
-        android:id="@+id/user_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_logout"
-        android:layout_margin="18dp"/>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Log in using the Browser"
-        android:textSize="26sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/metadata_panel"
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/tv_getStarted"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginTop="25dp"
         android:gravity="center"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_profile">
+        android:text="Let's get started!"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/iv_logo"
+        app:layout_constraintStart_toStartOf="@+id/iv_logo"
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
 
-        <TextView
-            android:id="@+id/text_heading_metadata"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Metadata"/>
+    <TextView
+        android:id="@+id/tv_signInDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/gs_margin"
+        android:layout_marginTop="@dimen/gs_margin"
+        android:layout_marginEnd="@dimen/gs_margin"
+        android:text="Lorem ipsum dolor sit amet, conseteur sadipscing elitr, sed diam nonumuy eirmod tempor"
+        app:layout_constraintEnd_toEndOf="@+id/tv_getStarted"
+        app:layout_constraintStart_toStartOf="@+id/tv_getStarted"
+        app:layout_constraintTop_toBottomOf="@+id/tv_getStarted" />
 
-        <TextView
-            android:id="@+id/text_info_metadata"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="8dp"
-            android:textAlignment="center"
-            android:text="Use the buttons and text box below to patch the 'country' field from 'user_metadata'"
-            android:textSize="12sp" />
+    <Button
+        android:id="@+id/btn_createAccount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/dodger_blue"
+        android:text="Create Account"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btn_signIn"
+        app:layout_constraintEnd_toEndOf="@+id/tv_signInDescription"
+        app:layout_constraintStart_toStartOf="@+id/tv_signInDescription" />
 
-        <EditText
-            android:id="@+id/input_edit_metadata"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-            <Button
-                android:id="@+id/button_get_metadata"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Get"
-                android:layout_marginRight="8dp"/>
-
-            <Button
-                android:id="@+id/button_patch_metadata"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Patch"
-                android:layout_marginLeft="8dp"/>
-        </LinearLayout>
-    </LinearLayout>
-
-
+    <Button
+        android:id="@+id/btn_signIn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:text="Sign in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_createAccount"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_createAccount" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,8 @@
 package com.s2dioapps.metask.ui.component.login.view
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +19,7 @@ import com.auth0.android.result.Credentials
 import com.auth0.android.result.UserProfile
 import com.google.android.material.snackbar.Snackbar
 import com.s2dioapps.metask.databinding.ActivityLoginBinding
+import com.s2dioapps.metask.ui.component.main.view.MainActivity
 import kotlin.reflect.typeOf
 
 class LoginActivity : AppCompatActivity() {
@@ -33,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
         val clientId: String = getString(R.string.com_auth0_client_id)
         val domain: String = getString(R.string.com_auth0_domain)
 
@@ -43,26 +47,26 @@ class LoginActivity : AppCompatActivity() {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.buttonLogin.setOnClickListener { loginWithBrowser() }
-        binding.buttonLogout.setOnClickListener { logout() }
-        binding.buttonGetMetadata.setOnClickListener { getUserMetadata() }
-        binding.buttonPatchMetadata.setOnClickListener { patchUserMetadata() }
+        binding.btnSignIn.setOnClickListener { loginWithBrowser() }
+       // binding.btnCreateAccount.setOnClickListener { logout() }
+       // binding.buttonGetMetadata.setOnClickListener { getUserMetadata() }
+        //binding.buttonPatchMetadata.setOnClickListener { patchUserMetadata() }
     }
 
     @SuppressLint("SetTextI18n")
     private fun updateUI() {
-        binding.buttonLogout.isEnabled = cachedCredentials != null
-        binding.metadataPanel.isVisible = cachedCredentials != null
-        binding.buttonLogin.isEnabled = cachedCredentials == null
-        binding.userProfile.isVisible = cachedCredentials != null
+       // binding.buttonLogout.isEnabled = cachedCredentials != null
+       // binding.metadataPanel.isVisible = cachedCredentials != null
+        binding.btnSignIn.isEnabled = cachedCredentials == null
+       // binding.userProfile.isVisible = cachedCredentials != null
 
-        binding.userProfile.text =
-            "Name: ${cachedUserProfile?.name ?: ""}\n" +
-                    "Email: ${cachedUserProfile?.email ?: ""}"
+//        binding.userProfile.text =
+//            "Name: ${cachedUserProfile?.name ?: ""}\n" +
+//                    "Email: ${cachedUserProfile?.email ?: ""}"
 
-        if (cachedUserProfile == null) {
-            binding.inputEditMetadata.setText("")
-        }
+//        if (cachedUserProfile == null) {
+//            binding.inputEditMetadata.setText("")
+//        }
     }
 
 
@@ -70,14 +74,28 @@ class LoginActivity : AppCompatActivity() {
         // Setup the WebAuthProvider, using the custom scheme and scope.
 
         val callback = object : Callback<Credentials, AuthenticationException> {
+
             override fun onFailure(exception: AuthenticationException) {
                 Log.d(TAG, "onFailure: ${exception.getDescription()}")
             }
 
             override fun onSuccess(credentials: Credentials) {
-                Log.d(TAG, "onSuccess: Access Token = ${credentials.accessToken}")
+                Log.d( TAG, "onSuccess: Access Token = ${credentials.accessToken}")
                 Log.d(TAG, "onSuccess: Id Token = ${credentials.idToken}")
                 Log.d(TAG, "onSuccess: Scopes = ${credentials.scope}")
+
+
+
+                val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                editor.apply {
+                    putString("STRING_KEY",credentials.accessToken)
+                }.apply()
+
+
+                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                finish()
+
             }
         }
 
@@ -88,23 +106,24 @@ class LoginActivity : AppCompatActivity() {
             .start(this, callback)
     }
 
-    private fun logout() {
-        WebAuthProvider.logout(account)
-            .withScheme(getString(R.string.com_auth0_scheme))
-            .start(this, object : Callback<Void?, AuthenticationException> {
-                override fun onSuccess(payload: Void?) {
-                    // The user has been logged out!
-                    cachedCredentials = null
-                    cachedUserProfile = null
-                    updateUI()
-                }
+//    private fun logout() {
 
-                override fun onFailure(exception: AuthenticationException) {
-                    updateUI()
-                    showSnackBar("Failure: ${exception.getCode()}")
-                }
-            })
-    }
+//        WebAuthProvider.logout(account)
+//            .withScheme(getString(R.string.com_auth0_scheme))
+//            .start(this, object : Callback<Void?, AuthenticationException> {
+//                override fun onSuccess(payload: Void?) {
+//                    // The user has been logged out!
+//                    cachedCredentials = null
+//                    cachedUserProfile = null
+//                    updateUI()
+//                }
+//
+//                override fun onFailure(exception: AuthenticationException) {
+//                    updateUI()
+//                    showSnackBar("Failure: ${exception.getCode()}")
+//                }
+//            })
+//    }
 
     private fun showUserProfile() {
         val client = AuthenticationAPIClient(account)
@@ -114,7 +133,7 @@ class LoginActivity : AppCompatActivity() {
         client.userInfo(cachedCredentials!!.accessToken!!)
             .start(object : Callback<UserProfile, AuthenticationException> {
                 override fun onFailure(exception: AuthenticationException) {
-                    showSnackBar("Failure: ${exception.getCode()}")
+                    //showSnackBar("Failure: ${exception.getCode()}")
                 }
 
                 override fun onSuccess(profile: UserProfile) {
@@ -132,7 +151,7 @@ class LoginActivity : AppCompatActivity() {
         usersClient.getProfile(cachedUserProfile!!.getId()!!)
             .start(object : Callback<UserProfile, ManagementException> {
                 override fun onFailure(exception: ManagementException) {
-                    showSnackBar("Failure: ${exception.getCode()}")
+                    //showSnackBar("Failure: ${exception.getCode()}")
                 }
 
                 override fun onSuccess(userProfile: UserProfile) {
@@ -140,36 +159,36 @@ class LoginActivity : AppCompatActivity() {
                     updateUI()
 
                     val country = userProfile.getUserMetadata()["country"] as String?
-                    binding.inputEditMetadata.setText(country)
+                   // binding.inputEditMetadata.setText(country)
                 }
             })
     }
 
-    private fun patchUserMetadata() {
-        val usersClient = UsersAPIClient(account, cachedCredentials!!.accessToken!!)
-        val metadata = mapOf("country" to binding.inputEditMetadata.text.toString())
-
-        usersClient
-            .updateMetadata(cachedUserProfile!!.getId()!!, metadata)
-            .start(object : Callback<UserProfile, ManagementException> {
-                override fun onFailure(exception: ManagementException) {
-                    showSnackBar("Failure: ${exception.getCode()}")
-                }
-
-                override fun onSuccess(profile: UserProfile) {
-                    cachedUserProfile = profile
-                    updateUI()
-                    showSnackBar("Successful")
-                }
-            })
-    }
-
-    private fun showSnackBar(text: String) {
-        Snackbar.make(
-            binding.root,
-            text,
-            Snackbar.LENGTH_LONG
-        ).show()
-    }
+//    private fun patchUserMetadata() {
+//        val usersClient = UsersAPIClient(account, cachedCredentials!!.accessToken!!)
+//        val metadata = mapOf("country" to binding.inputEditMetadata.text.toString())
+//
+//        usersClient
+//            .updateMetadata(cachedUserProfile!!.getId()!!, metadata)
+//            .start(object : Callback<UserProfile, ManagementException> {
+//                override fun onFailure(exception: ManagementException) {
+//                    showSnackBar("Failure: ${exception.getCode()}")
+//                }
+//
+//                override fun onSuccess(profile: UserProfile) {
+//                    cachedUserProfile = profile
+//                    updateUI()
+//                    showSnackBar("Successful")
+//                }
+//            })
+//    }
+//
+//    private fun showSnackBar(text: String) {
+//        Snackbar.make(
+//            binding.root,
+//            text,
+//            Snackbar.LENGTH_LONG
+//        ).show()
+//    }
 
 }
