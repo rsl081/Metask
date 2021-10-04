@@ -20,7 +20,6 @@
 
     <!--LogInActivity-->
     <string name="lets_get_started">Let\'s get started!</string>
-    <string name="get_started_signIn">Let\'s get started</string>
     <string name="get_started_description">Lorem ipsum dolor sit amet, conseteur sadipscing elitr, sed diam nonumuy eirmod tempor</string>
     <string name="create_account">Create Account</string>
     <string name="sign_in">Sign In</string>
