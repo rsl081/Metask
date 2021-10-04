@@ -73,7 +73,7 @@ class MainActivity : BaseActivity() {
         val sharedPreferences = getSharedPreferences("sharedPrefs",Context.MODE_PRIVATE)
         val savedString : String? = sharedPreferences.getString("STRING_KEY", null)
         if (savedString != null) {
-            Log.i("savedstring",savedString)
+            Log.i("savedstrings",savedString)
         }
     }
 
