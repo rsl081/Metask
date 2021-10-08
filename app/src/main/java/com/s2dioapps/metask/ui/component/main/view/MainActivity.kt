@@ -20,7 +20,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -28,17 +30,21 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.s2dioapps.metask.R
+import com.s2dioapps.metask.data.repository.UserPreferences
 import com.s2dioapps.metask.databinding.ActivityMainBinding
 import com.s2dioapps.metask.ui.base.view.BaseActivity
 import com.s2dioapps.metask.ui.base.viewmodel.BaseViewModel
+import com.s2dioapps.metask.ui.component.login.viewmodel.LoginViewModel
 import com.s2dioapps.metask.ui.component.main.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
 class MainActivity : BaseActivity() {
 
+    //private val mMainViewModel: MainViewModel by viewModels()
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private val mMainViewModel: MainViewModel by viewModels()
+
 
     override fun observeViewModel() {}
 
@@ -50,11 +56,11 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         //this.mMainViewModel = ViewModelProvider(this).get(mMainViewModel::class.java)
 
-        //binding = ActivityMainBinding.inflate(layoutInflater)
-        //setContentView(binding.root)
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+
         setSupportActionBar(binding.appBarMain.toolbar)
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -67,14 +73,22 @@ class MainActivity : BaseActivity() {
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
             ), drawerLayout
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val sharedPreferences = getSharedPreferences("sharedPrefs",Context.MODE_PRIVATE)
-        val savedString : String? = sharedPreferences.getString("STRING_KEY", null)
-        if (savedString != null) {
-            Log.i("savedstrings",savedString)
-        }
+        //Log.i("happy token", mMainViewModel.token.toString())
+
+        val userPreferences = UserPreferences(this)
+
+        userPreferences.accessToken.asLiveData().observe(this, Observer {
+//            val activity = if (it == null) AuthActivity::class.java else HomeActivity::class.java
+//            startNewActivity(activity)
+            if (it != null) {
+                Log.i("happyToken", "qweqwe $it")
+            }
+        })
+
     }
 
 
@@ -99,7 +113,7 @@ class MainActivity : BaseActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         var item = menu.findItem(R.id.action_date)
-        item.title = mMainViewModel.displayCurrentDate()
+        //item.title = mMainViewModel.displayCurrentDate()
         for (i in 0 until menu.size()) {
             val item = menu.getItem(i)
             val spanString = SpannableString(menu.getItem(i).title.toString())

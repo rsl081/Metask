@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="persian_red">#D52727</color>
     <color name="light_gray">#D4D4D4</color>
     <color name="faux_alice_blue">#EBF1FF</color>
@@ -9,6 +10,8 @@
     <color name="matterhorn">#535353</color>
     <color name="mariner">#4365AA</color>
 
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
 </resources>

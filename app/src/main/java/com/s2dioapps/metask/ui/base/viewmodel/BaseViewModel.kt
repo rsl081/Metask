@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-abstract class BaseViewModel : ViewModel(){
+abstract class BaseViewModel() : ViewModel(){
 
     fun displayCurrentDate(): String {
         val sdf = SimpleDateFormat("EEE, MMM d, yyyy")
