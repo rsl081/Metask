@@ -1,28 +1,26 @@
 package com.s2dioapps.metask.ui.component.login.view
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.core.view.isVisible
 import com.auth0.android.Auth0
-import com.s2dioapps.metask.R
-import com.auth0.android.authentication.AuthenticationAPIClient
 import com.auth0.android.authentication.AuthenticationException
 import com.auth0.android.callback.Callback
-import com.auth0.android.management.ManagementException
-import com.auth0.android.management.UsersAPIClient
 import com.auth0.android.provider.WebAuthProvider
 import com.auth0.android.result.Credentials
 import com.auth0.android.result.UserProfile
-import com.google.android.material.snackbar.Snackbar
+import com.s2dioapps.metask.R
 import com.s2dioapps.metask.databinding.ActivityLoginBinding
+import com.s2dioapps.metask.ui.base.view.BaseActivity
+import com.s2dioapps.metask.ui.component.login.viewmodel.LoginViewModel
 import com.s2dioapps.metask.ui.component.main.view.MainActivity
-import kotlin.reflect.typeOf
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import javax.inject.Inject
 
-class LoginActivity : AppCompatActivity() {
+
+class LoginActivity : BaseActivity() {
 
     private val TAG = "LoginActivity"
 
@@ -31,11 +29,26 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private var cachedCredentials: Credentials? = null
     private var cachedUserProfile: UserProfile? = null
+    @Inject lateinit var mLoginViewModel: LoginViewModel
+
+    //private lateinit var mLoginViewModel: LoginViewModel
+
+    //val dataStorePreferenceRepository: DataStorePreferenceRepository = DataStorePreferenceRepository.getInstance(this)
+
+
+    override fun observeViewModel() {}
+
+    override fun initViewBinding() {
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        //setContentView(R.layout.activity_login)
 
+        //mLoginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         val clientId: String = getString(R.string.com_auth0_client_id)
         val domain: String = getString(R.string.com_auth0_domain)
@@ -48,25 +61,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnSignIn.setOnClickListener { loginWithBrowser() }
-       // binding.btnCreateAccount.setOnClickListener { logout() }
-       // binding.buttonGetMetadata.setOnClickListener { getUserMetadata() }
-        //binding.buttonPatchMetadata.setOnClickListener { patchUserMetadata() }
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun updateUI() {
-       // binding.buttonLogout.isEnabled = cachedCredentials != null
-       // binding.metadataPanel.isVisible = cachedCredentials != null
-        binding.btnSignIn.isEnabled = cachedCredentials == null
-       // binding.userProfile.isVisible = cachedCredentials != null
-
-//        binding.userProfile.text =
-//            "Name: ${cachedUserProfile?.name ?: ""}\n" +
-//                    "Email: ${cachedUserProfile?.email ?: ""}"
-
-//        if (cachedUserProfile == null) {
-//            binding.inputEditMetadata.setText("")
-//        }
+        // binding.btnCreateAccount.setOnClickListener { logout() }
     }
 
 
@@ -84,19 +79,14 @@ class LoginActivity : AppCompatActivity() {
                 Log.d(TAG, "onSuccess: Id Token = ${credentials.idToken}")
                 Log.d(TAG, "onSuccess: Scopes = ${credentials.scope}")
 
+                CoroutineScope(Dispatchers.IO).async {
+                    mLoginViewModel.saveAccessTokens(credentials.accessToken)
+                    Log.d("tokensaved", "qwe" + mLoginViewModel.saveAccessTokens(credentials.accessToken).toString())
+                }
 
-
-                val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-                val editor = sharedPreferences.edit()
-                editor.apply {
-                    putString("STRING_KEY",credentials.accessToken)
-                }.apply()
-
-
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                finish()
-
+                navigateToMainScreen()
             }
+
         }
 
         WebAuthProvider.login(account)
@@ -107,7 +97,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
 //    private fun logout() {
-
 //        WebAuthProvider.logout(account)
 //            .withScheme(getString(R.string.com_auth0_scheme))
 //            .start(this, object : Callback<Void?, AuthenticationException> {
@@ -125,70 +114,12 @@ class LoginActivity : AppCompatActivity() {
 //            })
 //    }
 
-    private fun showUserProfile() {
-        val client = AuthenticationAPIClient(account)
+    private fun navigateToMainScreen() {
+        val nextScreenIntent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(nextScreenIntent)
+        finish()
 
-        // Use the access token to call userInfo endpoint.
-        // In this sample, we can assume cachedCredentials has been initialized by this point.
-        client.userInfo(cachedCredentials!!.accessToken!!)
-            .start(object : Callback<UserProfile, AuthenticationException> {
-                override fun onFailure(exception: AuthenticationException) {
-                    //showSnackBar("Failure: ${exception.getCode()}")
-                }
-
-                override fun onSuccess(profile: UserProfile) {
-                    cachedUserProfile = profile;
-                    updateUI()
-                }
-            })
     }
 
-    private fun getUserMetadata() {
-        // Create the user API client
-        val usersClient = UsersAPIClient(account, cachedCredentials!!.accessToken!!)
-
-        // Get the full user profile
-        usersClient.getProfile(cachedUserProfile!!.getId()!!)
-            .start(object : Callback<UserProfile, ManagementException> {
-                override fun onFailure(exception: ManagementException) {
-                    //showSnackBar("Failure: ${exception.getCode()}")
-                }
-
-                override fun onSuccess(userProfile: UserProfile) {
-                    cachedUserProfile = userProfile;
-                    updateUI()
-
-                    val country = userProfile.getUserMetadata()["country"] as String?
-                   // binding.inputEditMetadata.setText(country)
-                }
-            })
-    }
-
-//    private fun patchUserMetadata() {
-//        val usersClient = UsersAPIClient(account, cachedCredentials!!.accessToken!!)
-//        val metadata = mapOf("country" to binding.inputEditMetadata.text.toString())
-//
-//        usersClient
-//            .updateMetadata(cachedUserProfile!!.getId()!!, metadata)
-//            .start(object : Callback<UserProfile, ManagementException> {
-//                override fun onFailure(exception: ManagementException) {
-//                    showSnackBar("Failure: ${exception.getCode()}")
-//                }
-//
-//                override fun onSuccess(profile: UserProfile) {
-//                    cachedUserProfile = profile
-//                    updateUI()
-//                    showSnackBar("Successful")
-//                }
-//            })
-//    }
-//
-//    private fun showSnackBar(text: String) {
-//        Snackbar.make(
-//            binding.root,
-//            text,
-//            Snackbar.LENGTH_LONG
-//        ).show()
-//    }
 
 }
