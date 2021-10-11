@@ -1,8 +1,10 @@
 package com.s2dioapps.metask.ui.component.login.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import com.auth0.android.Auth0
 import com.auth0.android.authentication.AuthenticationException
 import com.auth0.android.callback.Callback
@@ -14,9 +16,11 @@ import com.s2dioapps.metask.databinding.ActivityLoginBinding
 import com.s2dioapps.metask.ui.base.view.BaseActivity
 import com.s2dioapps.metask.ui.component.login.viewmodel.LoginViewModel
 import com.s2dioapps.metask.ui.component.main.view.MainActivity
+import com.s2dioapps.metask.utils.Constant
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -79,10 +83,18 @@ class LoginActivity : BaseActivity() {
                 Log.d(TAG, "onSuccess: Id Token = ${credentials.idToken}")
                 Log.d(TAG, "onSuccess: Scopes = ${credentials.scope}")
 
-                CoroutineScope(Dispatchers.IO).async {
-                    mLoginViewModel.saveAccessTokens(credentials.accessToken)
-                    Log.d("tokensaved", "qwe" + mLoginViewModel.saveAccessTokens(credentials.accessToken).toString())
-                }
+                Constant.MSHAREDPREFERENCES = getSharedPreferences(Constant.PREFERENCE_NAME, Context.MODE_PRIVATE)
+                val editor = Constant.MSHAREDPREFERENCES.edit()
+                editor.apply {
+                    putString(Constant.TOKEN,credentials.accessToken)
+                }.apply()
+
+//                CoroutineScope(Dispatchers.IO).async {
+//                    Log.d("tokensaved", "qwe" + mLoginViewModel.saveAccessTokens(credentials.accessToken).toString())
+//                    mLoginViewModel.saveAccessTokens(credentials.accessToken)
+//                }
+
+
 
                 navigateToMainScreen()
             }
