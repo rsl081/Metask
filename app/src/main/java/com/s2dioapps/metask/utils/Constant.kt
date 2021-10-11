@@ -9,6 +9,8 @@ object Constant {
     val clientId: String = R.string.com_auth0_client_id.toString()
     val domain: String = R.string.com_auth0_domain.toString()
 
+    const val BASE_URL_AUTH: String = "https://dev-eb4zk63w.us.auth0.com/"
+
     lateinit var MSHAREDPREFERENCES: SharedPreferences
     const val PREFERENCE_NAME = "MeTaskAppPreference"
 

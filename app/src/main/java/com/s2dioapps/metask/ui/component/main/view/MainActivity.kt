@@ -34,6 +34,7 @@ import com.s2dioapps.metask.data.repository.UserPreferences
 import com.s2dioapps.metask.databinding.ActivityMainBinding
 import com.s2dioapps.metask.ui.base.view.BaseActivity
 import com.s2dioapps.metask.ui.base.viewmodel.BaseViewModel
+import com.s2dioapps.metask.ui.component.home.viewmodel.HomeViewModel
 import com.s2dioapps.metask.ui.component.login.viewmodel.LoginViewModel
 import com.s2dioapps.metask.ui.component.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +43,7 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
-    @Inject lateinit var mMainViewModel: MainViewModel
+  //  private lateinit var mMainViewModel: MainViewModel
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
@@ -57,7 +58,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //this.mMainViewModel = ViewModelProvider(this).get(mMainViewModel::class.java)
+//        this.mMainViewModel = ViewModelProvider(this).get(mMainViewModel::class.java)
 
 //        binding = ActivityMainBinding.inflate(layoutInflater)
 //        setContentView(binding.root)
@@ -103,7 +104,7 @@ class MainActivity : BaseActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         var item = menu.findItem(R.id.action_date)
-        item.title = mMainViewModel.displayCurrentDate()
+       // item.title = mMainViewModel.displayCurrentDate()
         for (i in 0 until menu.size()) {
             val item = menu.getItem(i)
             val spanString = SpannableString(menu.getItem(i).title.toString())
