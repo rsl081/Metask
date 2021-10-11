@@ -37,11 +37,12 @@ import com.s2dioapps.metask.ui.base.viewmodel.BaseViewModel
 import com.s2dioapps.metask.ui.component.login.viewmodel.LoginViewModel
 import com.s2dioapps.metask.ui.component.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 class MainActivity : BaseActivity() {
 
-    //private val mMainViewModel: MainViewModel by viewModels()
+    @Inject lateinit var mMainViewModel: MainViewModel
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
@@ -78,17 +79,6 @@ class MainActivity : BaseActivity() {
         navView.setupWithNavController(navController)
 
         //Log.i("happy token", mMainViewModel.token.toString())
-
-        val userPreferences = UserPreferences(this)
-
-        userPreferences.accessToken.asLiveData().observe(this, Observer {
-//            val activity = if (it == null) AuthActivity::class.java else HomeActivity::class.java
-//            startNewActivity(activity)
-            if (it != null) {
-                Log.i("happyToken", "qweqwe $it")
-            }
-        })
-
     }
 
 
@@ -113,7 +103,7 @@ class MainActivity : BaseActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         var item = menu.findItem(R.id.action_date)
-        //item.title = mMainViewModel.displayCurrentDate()
+        item.title = mMainViewModel.displayCurrentDate()
         for (i in 0 until menu.size()) {
             val item = menu.getItem(i)
             val spanString = SpannableString(menu.getItem(i).title.toString())
