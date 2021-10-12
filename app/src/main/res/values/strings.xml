@@ -17,7 +17,12 @@
 
     <!--SplashActivity-->
     <string name="splash_screen_title">MeTask</string>
-
+    <!--getStarted-->
     <string name="get_started_signIn">Let\'s get started</string>
     <string name="get_started_description">Lorem ipsum dolor sit amet, conseteur sadipscing elitr, sed diam nonumuy eirmod tempor</string>
+
+    <!--CreateTask-->
+    <string name="ct_CreateTask">Create Task</string>
+    <string name="ct_details">Details</string>
+    <string name="ct_assignee">Assignee/s</string>
 </resources>

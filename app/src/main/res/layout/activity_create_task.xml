@@ -4,15 +4,211 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.component.createtask.view.CreateTaskActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+    <Toolbar
+        android:id="@+id/ct_toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CreateTask"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_createTask"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:text="@string/ct_CreateTask"
+                android:textSize="@dimen/ct_textSize"
+                android:textColor="@color/matterhorn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/ct_back"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:textColor="@color/matterhorn"
+                android:drawableLeft="@drawable/ic_baseline_arrow_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ct_cardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/white_smoke"
+        android:orientation="vertical"
+        app:cardCornerRadius="@dimen/_20sdp"
+        android:elevation="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="@+id/ct_toolbar"
+        app:layout_constraintStart_toStartOf="@+id/ct_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/ct_toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_ct_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/matterhorn"
+                android:text="@string/ct_details"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/it_title"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/ct_margin"
+                android:layout_marginTop="@dimen/ct_margin"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_ct_details">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Title"
+                    android:drawableLeft="@drawable/ic_edit"
+                    android:background="@color/white"
+                    android:fontFamily="@font/open_sans"
+                    android:singleLine="true"
+                    android:textColor="@color/matterhorn"
+                    tools:ignore="TextContrastCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/it_description"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ct_margin"
+                app:layout_constraintEnd_toEndOf="@+id/it_title"
+                app:layout_constraintStart_toStartOf="@+id/it_title"
+                app:layout_constraintTop_toBottomOf="@+id/it_title">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:background="@color/white"
+                    android:fontFamily="@font/open_sans"
+                    android:hint="Description"
+                    android:drawableLeft="@drawable/ic_edit"
+                    android:singleLine="true"
+                    android:textColor="@color/matterhorn"
+                    tools:ignore="TextContrastCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/it_date"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ct_margin"
+                app:layout_constraintEnd_toEndOf="@+id/it_description"
+                app:layout_constraintStart_toStartOf="@+id/it_description"
+                app:layout_constraintTop_toBottomOf="@+id/it_description">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:fontFamily="@font/open_sans"
+                    android:singleLine="true"
+                    android:hint="Date"
+                    android:drawableLeft="@drawable/ic_calendar"
+                    android:textColor="@color/matterhorn"
+                    tools:ignore="TextContrastCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/tv_ct_Assignee"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/ct_margin"
+                android:layout_marginTop="@dimen/ct_margin"
+                android:text="@string/ct_assignee"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/it_date" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_ct_profile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="@dimen/ct_margin"
+                android:src="@drawable/ic_person"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_ct_Assignee"
+                app:layout_constraintTop_toBottomOf="@+id/tv_ct_Assignee" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_ct_addPeople"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/ic_person_add"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/civ_ct_profile"
+                app:layout_constraintTop_toBottomOf="@+id/tv_ct_Assignee" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btn_ct_create"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/dodger_blue"
+        android:gravity="center"
+        android:text="Create"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cancel"
+        app:layout_constraintEnd_toEndOf="@+id/ct_cardView"
+        app:layout_constraintStart_toStartOf="@+id/ct_cardView"
+        app:layout_constraintTop_toBottomOf="@+id/ct_cardView" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_ct_create"
+        app:layout_constraintStart_toStartOf="@+id/btn_ct_create" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
