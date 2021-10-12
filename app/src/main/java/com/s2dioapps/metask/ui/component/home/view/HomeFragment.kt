@@ -52,16 +52,15 @@ class HomeFragment : Fragment() {
             startActivity(Intent(requireActivity(), CreateTaskActivity::class.java))
         }
 
-
-
         homeViewModel.loginResponseCall()?.enqueue(object: Callback<User> {
             @RequiresApi(Build.VERSION_CODES.N)
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if(response.isSuccessful) {
 
-                    val token  = response.body()?.name
+                    val token  = response.body()
+
                     if (token != null) {
-                        Log.i("names", token)
+                        Log.i("names", token.toString())
                     }
 
                     //val tokenResponseJsonString = Gson().toJson(tokenForSignin)
