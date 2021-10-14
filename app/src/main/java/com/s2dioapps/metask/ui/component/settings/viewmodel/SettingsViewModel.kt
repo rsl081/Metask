@@ -1,4 +1,4 @@
-package com.s2dioapps.metask.ui.component.setting.viewmodel
+package com.s2dioapps.metask.ui.component.settings.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
