@@ -1,4 +1,4 @@
-package com.s2dioapps.metask.ui.component.setting.view
+package com.s2dioapps.metask.ui.component.settings.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.s2dioapps.metask.databinding.FragmentSettingsBinding
-import com.s2dioapps.metask.ui.component.setting.viewmodel.SettingsViewModel
+import com.s2dioapps.metask.ui.component.settings.viewmodel.SettingsViewModel
 
 class SettingsFragment : Fragment() {
 
