@@ -12,8 +12,11 @@
         android:supportsRtl="true"
         android:name=".App"
         android:theme="@style/Theme.Metask">
-        <activity android:name=".ui.component.createtask.view.CreateTaskActivity"></activity>
         <activity
+
+            android:name="com.s2dioapps.metask.ui.component.register.view.RegisterActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Metask.NoActionBar">
             android:name=".ui.component.splash.view.SplashActivity"
             android:theme="@style/Theme.Metask.NoActionBar"
             android:exported="true">
@@ -22,18 +25,28 @@
         <activity
             android:name=".ui.component.login.view.LoginActivity"
             android:theme="@style/Theme.Metask.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.component.createtask.view.CreateTaskActivity" />
+        <activity
+            android:name=".ui.component.splash.view.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Metask.NoActionBar">
+
+        </activity>
+        <activity android:name=".ui.component.login.view.LoginActivity" />
+
         <activity
             android:name=".ui.component.main.view.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Metask.NoActionBar">
         </activity>
-
 
         <meta-data
             android:name="preloaded_fonts"

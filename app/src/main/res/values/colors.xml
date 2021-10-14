@@ -9,7 +9,11 @@
     <color name="dodger_blue">#2196F3</color>
     <color name="matterhorn">#535353</color>
     <color name="mariner">#4365AA</color>
+  
     <color name="white_smoke">#FBFBFB</color>
+    <color name="aquamarine">#73F0CA</color>
+    <color name="sunset">#c94c4c</color>
+    <color name="rosebud">#eea29a</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

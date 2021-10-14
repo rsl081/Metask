@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mariner"
+    tools:context=".ui.component.register.view.RegisterActivity">
+
+    <TextView
+        android:id="@+id/tv_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ra_margin6"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/ra_text_size4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_register"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progressTint="@color/dodger_blue"
+        android:layout_marginStart="@dimen/ra_margin3"
+        android:layout_marginTop="@dimen/ra_margin2"
+        android:layout_marginEnd="@dimen/ra_margin3"
+        android:indeterminateOnly="false"
+        android:max="100"
+        android:progress="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_app_name"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ra_height"
+        android:layout_marginTop="@dimen/ra_margin8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pb_register" />
+
+    <TextView
+        android:id="@+id/tv_already_have_an_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans"
+        android:text="@string/already_have_an_account"
+        android:textColor="@color/light_gray"
+        android:textSize="@dimen/ra_text_size2"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_sign_in"
+        app:layout_constraintEnd_toStartOf="@+id/tv_sign_in"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_sign_in"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/tv_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/ra_margin6"
+        android:fontFamily="@font/open_sans"
+        android:padding="@dimen/ra_padding"
+        android:text="@string/sign_in"
+        android:visibility="visible"
+        android:textColor="@color/aquamarine"
+        android:textSize="@dimen/ra_text_size3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_already_have_an_account"
+        tools:ignore="TextContrastCheck,TextContrastCheck,TextContrastCheck" />
+</androidx.constraintlayout.widget.ConstraintLayout>
