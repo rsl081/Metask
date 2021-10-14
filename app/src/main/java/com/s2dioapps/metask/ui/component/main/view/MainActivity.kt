@@ -20,6 +20,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -38,26 +39,29 @@ import com.s2dioapps.metask.ui.component.home.viewmodel.HomeViewModel
 import com.s2dioapps.metask.ui.component.login.viewmodel.LoginViewModel
 import com.s2dioapps.metask.ui.component.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
-  //  private lateinit var mMainViewModel: MainViewModel
+
+    private val mMainViewModel: MainViewModel by viewModels()
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-
 
     override fun observeViewModel() {}
 
     override fun initViewBinding() {
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 //        this.mMainViewModel = ViewModelProvider(this).get(mMainViewModel::class.java)
 
 //        binding = ActivityMainBinding.inflate(layoutInflater)
@@ -94,9 +98,7 @@ class MainActivity : BaseActivity() {
         if (parent?.parent is FrameLayout) {
             (parent?.parent as View).setBackgroundColor(getColor(R.color.mariner))
         }
-
         return super.onCreateView(parent, name, context!!, attrs)
-
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -104,24 +106,9 @@ class MainActivity : BaseActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         var item = menu.findItem(R.id.action_date)
-       // item.title = mMainViewModel.displayCurrentDate()
-        for (i in 0 until menu.size()) {
-            val item = menu.getItem(i)
-            val spanString = SpannableString(menu.getItem(i).title.toString())
-
-            spanString.setSpan(
-                ForegroundColorSpan(getColor(R.color.matterhorn)),
-                0,
-                spanString.length,
-                0
-            ) //fix the color to matterhorn
-
-            item.title = spanString
-        }
-
+        item.title = mMainViewModel.displayCurrentDate()
         return true
     }
-
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        when(item.itemId){
 //            R.id.action_date->{

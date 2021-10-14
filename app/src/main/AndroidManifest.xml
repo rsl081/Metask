@@ -10,6 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".App"
         android:theme="@style/Theme.Metask">
         <activity
 
@@ -21,7 +22,9 @@
             android:exported="true">
 
         </activity>
-        <activity android:name=".ui.component.login.view.LoginActivity">
+        <activity
+            android:name=".ui.component.login.view.LoginActivity"
+            android:theme="@style/Theme.Metask.NoActionBar">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,7 +45,8 @@
         <activity
             android:name=".ui.component.main.view.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Metask.NoActionBar" />
+            android:theme="@style/Theme.Metask.NoActionBar">
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

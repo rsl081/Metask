@@ -11,7 +11,8 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_90sdp"
         app:cardCornerRadius="@dimen/_16sdp"
-        app:cardElevation="@dimen/_20sdp"
+        app:cardElevation="@dimen/_5sdp"
+        android:backgroundTint="@color/white_smoke"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toTopOf="@+id/guideline_top">
@@ -68,18 +69,28 @@
 
     </androidx.cardview.widget.CardView>
 
-    <!--Guidelines-->
-    <CalendarView
-        android:id="@+id/calendar_view"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_calendar"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="visible"
+        app:cardCornerRadius="@dimen/_16sdp"
+        app:cardElevation="@dimen/_5sdp"
+        android:backgroundTint="@color/white_smoke"
         app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
 
+        <CalendarView
+            android:id="@+id/calendar_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <!--Guidelines-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
         android:layout_width="wrap_content"
@@ -106,7 +117,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="@dimen/_20sdp" />
+        app:layout_constraintGuide_end="16dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button"
@@ -114,28 +125,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="My Task"
-        app:strokeColor="@color/black"
-        app:strokeWidth="@dimen/_1sdp"
-        app:cornerRadius="@dimen/_15sdp"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:cornerRadius="@dimen/_15sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tv_create_newtask_home"
-        app:layout_constraintTop_toBottomOf="@+id/cv_greeting" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_greeting"
+        app:strokeColor="@color/black"
+        app:strokeWidth="@dimen/_1sdp" />
 
     <TextView
         android:id="@+id/tv_create_newtask_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
         android:gravity="start|center_vertical"
         android:text="Create new task"
         app:drawableStartCompat="@drawable/mdi___plus"
-        app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/cv_greeting" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -143,6 +148,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="218dp" />
+        app:layout_constraintGuide_begin="207dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
