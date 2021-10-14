@@ -18,4 +18,5 @@
             android:icon="@drawable/mdi___cog"
             android:title="@string/menu_settings" />
     </group>
+
 </menu>

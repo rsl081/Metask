@@ -5,11 +5,12 @@
     <string name="nav_header_title">John Doe</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_date"></string>
+    <string name="action_date">432</string>
 
-    <string name="menu_home">S2dioapps</string>
-    <string name="menu_task_today">Task Today</string>
-    <string name="menu_settings">Settings</string>
+    <string name="menu_home"><font fgcolor="#FFFFFFFF">S2dioapps</font></string>
+
+    <string name="menu_task_today"><font fgcolor="#FFFFFFFF">Task Today</font></string>
+    <string name="menu_settings"><font fgcolor="#FFFFFFFF">Settings</font></string>
 
     <string name="com_auth0_client_id">jQY5DDjCDoRL3d03VaJK03Y7R4wZlbca</string>
     <string name="com_auth0_domain">dev-eb4zk63w.us.auth0.com</string>
