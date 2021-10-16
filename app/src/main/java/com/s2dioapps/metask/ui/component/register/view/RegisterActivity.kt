@@ -1,8 +1,10 @@
 package com.s2dioapps.metask.ui.component.register.view
 
+import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
@@ -19,9 +21,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_DRAGGING
 import com.s2dioapps.metask.R
 import com.s2dioapps.metask.databinding.ActivityLoginBinding
 import com.s2dioapps.metask.databinding.ActivityRegisterBinding
+import com.s2dioapps.metask.databinding.FragmentFullNameBinding
 import com.s2dioapps.metask.ui.component.register.adapter.RegisterAdapter
 import com.s2dioapps.metask.ui.component.register.viewmodel.RegisterViewModel
 
@@ -29,6 +33,7 @@ import com.s2dioapps.metask.ui.component.register.viewmodel.RegisterViewModel
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var _bidning: FragmentFullNameBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +41,6 @@ class RegisterActivity : AppCompatActivity() {
 
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
 
         val fragmentList = arrayListOf<Fragment>(
             FullNameFragment(),
@@ -47,13 +50,9 @@ class RegisterActivity : AppCompatActivity() {
         )
 
         val adapter = RegisterAdapter(fragmentList, this)
-        viewPager.adapter = adapter
+        binding.viewPager.adapter = adapter
 
-
-        //val progressBar = this.findViewById<ProgressBar>(R.id.pb_register)
-
-
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             @RequiresApi(Build.VERSION_CODES.N)
             override fun onPageSelected(position: Int) {
                 when (position) {
@@ -87,9 +86,11 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-
-
-
-
-
+    override fun onBackPressed() {
+        if(binding.viewPager.currentItem == 0) {
+            super.onBackPressed()
+        }else{
+            binding.viewPager.currentItem = binding.viewPager.currentItem - 1
+        }
+    }
 }
