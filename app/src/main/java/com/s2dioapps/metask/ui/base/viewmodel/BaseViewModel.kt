@@ -14,4 +14,12 @@ abstract class BaseViewModel() : ViewModel(){
         return currentDate
     }
 
+    fun selectedDate(): String {
+        val sdf = SimpleDateFormat("yyyy-mm-d")
+        val calendar = Calendar.getInstance()
+        val currentDate: String = sdf.format(calendar.time)
+
+        return currentDate
+    }
+
 }

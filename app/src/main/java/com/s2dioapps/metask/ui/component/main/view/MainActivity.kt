@@ -12,8 +12,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.Toast
-import android.widget.Toolbar
 import androidx.activity.viewModels
 import androidx.annotation.ColorInt
 import androidx.annotation.RequiresApi
@@ -31,7 +29,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.s2dioapps.metask.R
-import com.s2dioapps.metask.data.repository.UserPreferences
 import com.s2dioapps.metask.databinding.ActivityMainBinding
 import com.s2dioapps.metask.ui.base.view.BaseActivity
 import com.s2dioapps.metask.ui.base.viewmodel.BaseViewModel
@@ -109,16 +106,7 @@ class MainActivity : BaseActivity() {
         item.title = mMainViewModel.displayCurrentDate()
         return true
     }
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when(item.itemId){
-//            R.id.action_date->{
-//                item.title = "goods"
-//                Toast.makeText(applicationContext, "Happy!", Toast.LENGTH_SHORT).show();
-//                return true
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
