@@ -133,6 +133,7 @@
                 android:backgroundTint="@color/dodger_blue"
                 android:fontFamily="@font/open_sans"
                 android:text="@string/next"
+                android:enabled="false"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/ra_text_size"

@@ -37,8 +37,6 @@
             android:theme="@style/Theme.Metask.NoActionBar">
 
         </activity>
-
-
         <activity
             android:name=".ui.component.main.view.MainActivity"
             android:label="@string/app_name"

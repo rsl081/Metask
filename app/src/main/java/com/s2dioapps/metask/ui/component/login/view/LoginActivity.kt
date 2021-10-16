@@ -14,8 +14,10 @@ import com.auth0.android.result.UserProfile
 import com.s2dioapps.metask.R
 import com.s2dioapps.metask.databinding.ActivityLoginBinding
 import com.s2dioapps.metask.ui.base.view.BaseActivity
+import com.s2dioapps.metask.ui.component.createtask.view.CreateTaskActivity
 import com.s2dioapps.metask.ui.component.login.viewmodel.LoginViewModel
 import com.s2dioapps.metask.ui.component.main.view.MainActivity
+import com.s2dioapps.metask.ui.component.register.view.RegisterActivity
 import com.s2dioapps.metask.utils.Constant
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -63,6 +65,9 @@ class LoginActivity : BaseActivity() {
         setContentView(binding.root)
         binding.btnSignIn.setOnClickListener { loginWithBrowser() }
         // binding.btnCreateAccount.setOnClickListener { logout() }
+        binding.btnCreateAccount.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
     }
 
 
