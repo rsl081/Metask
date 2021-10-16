@@ -30,7 +30,7 @@ class LoginActivity : BaseActivity() {
 
     private val TAG = "LoginActivity"
 
-    private lateinit var account: Auth0
+    //private lateinit var account: Auth0
 
     private lateinit var binding: ActivityLoginBinding
     private var cachedCredentials: Credentials? = null
@@ -52,14 +52,11 @@ class LoginActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_login)
-
-        //mLoginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         val clientId: String = getString(R.string.com_auth0_client_id)
         val domain: String = getString(R.string.com_auth0_domain)
 
-        account = Auth0(
+        Constant.account = Auth0(
             clientId,
             domain
         )
@@ -99,14 +96,12 @@ class LoginActivity : BaseActivity() {
 //                    mLoginViewModel.saveAccessTokens(credentials.accessToken)
 //                }
 
-
-
                 navigateToMainScreen()
             }
 
         }
 
-        WebAuthProvider.login(account)
+        WebAuthProvider.login(Constant.account)
             .withScope("openid profile email read:current_user update:current_user_metadata")
             // specify the audience for the Auth0 Management API
             .withAudience("https://metask/api")
@@ -121,12 +116,11 @@ class LoginActivity : BaseActivity() {
 //                    // The user has been logged out!
 //                    cachedCredentials = null
 //                    cachedUserProfile = null
-//                    updateUI()
+//
 //                }
 //
 //                override fun onFailure(exception: AuthenticationException) {
-//                    updateUI()
-//                    showSnackBar("Failure: ${exception.getCode()}")
+//
 //                }
 //            })
 //    }

@@ -17,6 +17,7 @@
             android:name="com.s2dioapps.metask.ui.component.register.view.RegisterActivity"
             android:exported="true"
             android:theme="@style/Theme.Metask.NoActionBar">
+
         </activity>
         <activity
             android:name=".ui.component.login.view.LoginActivity"
